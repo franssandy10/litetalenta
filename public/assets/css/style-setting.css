@@ -1,0 +1,108 @@
+.tabs .tab a.active {
+	background-color: #fff;
+}
+.tabs.tab-horizontal {
+	display: block;
+	background: transparent;
+	height: auto;
+}
+
+.tabs.tab-horizontal .tab {
+	float: none;
+	width: 100% !important;
+	height: auto;
+	display: block;
+	list-style: none;
+}
+
+.tabs.tab-horizontal .tab .fa {
+	display: block;
+}
+
+.tabs.tab-horizontal .indicator {
+	display: none;
+}
+
+.tabs.tab-horizontal .tab-content {
+	min-height: 5000px;
+}
+
+.h-tabRow {
+	padding: 10px;
+	background: #DEE3E1;
+	width: 100%;
+	height: auto;
+	/* min-height: 500px; */
+	overflow: auto;
+}
+
+.tabs.tab-horizontal .tab a {
+	border:none;
+	padding: 20px 0;
+	line-height: 15px;
+	color: rgb(148, 148, 148);
+	font-family: 'lato-black';
+	font-size: 12px;
+}
+
+.settingDiv {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	min-height: 500px;
+	padding: 50px;
+}	
+
+ul.tree:first {
+	background: none;
+}
+
+ul.tree, ul.tree ul {
+	list-style-type: none;
+	background: url(../images/vline.png) repeat-y;
+	margin: 0;
+	padding: 0;
+}
+
+ul.tree ul {
+	margin-left: 10px;
+}
+
+ul.tree li {
+	margin: 0;
+	padding: 0 12px;
+	line-height: 30px;
+	background: url(../images/node.png) no-repeat;
+	color: #fff;
+	font-size: 11px;
+}
+
+ul.tree li span {
+	background: #B7B7B7;
+	border-radius: 6px;
+	padding: 5px 5px;
+	position: relative;
+	top: -5px;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+
+ul.tree li span a {
+	margin:0px 5px 0 0;
+}
+
+ul.tree li:last-child {
+	background: url(../images/lastnode.png) no-repeat;
+}
+
+ul.tree .treeSymbol {
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+ul.tree li.ui-state-highlight { height: 35px; line-height: 30px; border: 1px solid #fcefa1; background: #fbf9ee;color: #363636;}
+
+#notificationSetting .input-field:last-child {
+	margin-bottom: 35px;
+}

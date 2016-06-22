@@ -1,0 +1,199 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "talenta-font";
+  src:url("../fonts/talenta-font.eot");
+  src:url("../fonts/talenta-font.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/talenta-font.woff") format("woff"),
+    url("../fonts/talenta-font.ttf") format("truetype"),
+    url("../fonts/talenta-font.svg#talenta-font") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "talenta-font" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="talenta-"]:before,
+[class*=" talenta-"]:before {
+  font-family: "talenta-font" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.talenta-kalkulator-1:before {
+  content: "\62";
+}
+.talenta-profil:before {
+  content: "\63";
+}
+.talenta-kalender-2:before {
+  content: "\64";
+}
+.talenta-orang-3:before {
+  content: "\65";
+}
+.talenta-jam-1:before {
+  content: "\66";
+}
+.talenta-gembok:before {
+  content: "\67";
+}
+.talenta-orang-1:before {
+  content: "\68";
+}
+.talenta-orang-2:before {
+  content: "\69";
+}
+.talenta-akses-setting:before {
+  content: "\61";
+}
+.talenta-orang-setting:before {
+  content: "\6a";
+}
+.talenta-organisasi-setting:before {
+  content: "\6b";
+}
+.talenta-profil-setting:before {
+  content: "\6c";
+}
+.talenta-struktur-setting:before {
+  content: "\6d";
+}
+.talenta-kalender-3:before {
+  content: "\6e";
+}
+.talenta-uang:before {
+  content: "\6f";
+}
+.talenta-timbangan:before {
+  content: "\70";
+}
+.talenta-komponen:before {
+  content: "\71";
+}
+.talenta-kalkulator-2:before {
+  content: "\72";
+}
+.talenta-kalender-1:before {
+  content: "\73";
+}
+.talenta-modul:before {
+  content: "\74";
+}
+.talenta-delegasi-orang:before {
+  content: "\75";
+}
+.talenta-centang:before {
+  content: "\76";
+}
+.talenta-pensil:before {
+  content: "\77";
+}
+.talenta-uang-1:before {
+  content: "\78";
+}
+.talenta-kalender-4:before {
+  content: "\79";
+}
+.talenta-tulisan:before {
+  content: "\7a";
+}
+.talenta-jam-2:before {
+  content: "\41";
+}
+.talenta-orang-4:before {
+  content: "\42";
+}
+.talenta-aset-kotak:before {
+  content: "\43";
+}
+.talenta-orang-kotak:before {
+  content: "\44";
+}
+.talenta-tambah:before {
+  content: "\45";
+}
+.talenta-kalender-5:before {
+  content: "\46";
+}
+.talenta-panah:before {
+  content: "\47";
+}
+.talenta-tulisan-1:before {
+  content: "\48";
+}
+.talenta-timbangan-1:before {
+  content: "\49";
+}
+.talenta-pattern:before {
+  content: "\4a";
+}
+.talenta-kalender-6:before {
+  content: "\4b";
+}
+.talenta-kalender-7:before {
+  content: "\4c";
+}
+.talenta-kalender-8:before {
+  content: "\4d";
+}
+.talenta-jam-3:before {
+  content: "\4e";
+}
+.talenta-kalender-9:before {
+  content: "\4f";
+}
+.talenta-tulisan-2:before {
+  content: "\50";
+}
+.talenta-cabang:before {
+  content: "\51";
+}
+.talenta-chat:before {
+  content: "\53";
+}
+.talenta-orang-5:before {
+  content: "\54";
+}
+.talenta-kaca-pembesar:before {
+  content: "\55";
+}
+.talenta-transfer:before {
+  content: "\56";
+}
+.talenta-centang-approval:before {
+  content: "\57";
+}
+.talenta-delegasi-panah:before {
+  content: "\58";
+}
+.talenta-modul-1:before {
+  content: "\59";
+}
+.talenta-silang:before {
+  content: "\5a";
+}
+.talenta-talenta-icon-assets-48-48:before {
+  content: "\52";
+}
+.talenta-laptop-ess-setting:before {
+  content: "\30";
+}

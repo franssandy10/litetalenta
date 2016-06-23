@@ -22,8 +22,8 @@
             </div>
           </div>
         <input class="text_success" type="hidden" value="Login Successfull"/>
+        <button class="btn btnB01 white-text bWhite positionRelative" id="submitButton" name="btnLogin">login</button>
         {!! Form::close() !!}
-        <a class="btn btnB01 white-text bWhite positionRelative" id="submitButton">login</a>
       </div>
       @include('layouts.footers.footer-login')
     </div><!-- Valign -->
@@ -38,6 +38,10 @@ $(document).ready(function(){
     $form=$(this).parents('.container').find('form');
     validateForm($form);
   });
+
+  $('#register-form').on('submit', function(e){
+    e.preventDefault();
+  })
 });
 </script>
 @endsection

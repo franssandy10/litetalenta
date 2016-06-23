@@ -4,16 +4,33 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class doLoginTest extends TestCase
+class LoginTest extends TestCase
 {
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testExample()
+
+    public function testClickLogin(){
+    	$this->visit('/')
+    		 ->click('login')
+    		 ->seePageIs('/login');
+    }
+
+    public function testFormLogin(){
+    	$this->visit('/login')
+    		 ->see('Welcome to Talenta')
+    		 ->dontSee('Welcome to Login')
+    		 ->type('rendyjames01@gmail.com','email')
+    		 ->type('Rendyjames123','password')
+    		 ->press('btnLogin')
+    		 ->seeJson(['url'=>route('dashboard')]);
+    }
+
+    public function testNewLogin()
     {
-      // if all empty
+        // if all empty
       $this->post('/login'
        , ['email' => ''
          ,'password'=>''])
@@ -33,16 +50,15 @@ class doLoginTest extends TestCase
        , ['email' => 'tesing.com'
          ,'password'=>'testing'])
       ->seeJson(['The email must be a valid email address.']);
-      // 3. if email and password not
+      // 3. if email and password wrong
       $this->post('/login'
        , ['email' => 'tesing@testing.com'
          ,'password'=>'testing'])
       ->seeJson(['Email or Password is wrong']);
-      // 4. if have email and password
+      // 4. if have email and password true
        $this->post('/login'
-        , ['email' => 'vald.karate@gmail.com'
-          ,'password'=>'Testing123'])
-       ->seeJson(['status'=>'success','url'=>'http://litetalenta.dev/dashboard']);
-
+        , ['email' => 'rendyjames01@gmail.com'
+          ,'password'=>'Rendyjames123'])
+       ->seeJson(['status'=>'success','url'=>route('dashboard')]);
     }
 }

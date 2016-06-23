@@ -11,14 +11,10 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testIndex()
     {
-        // $this->assertTrue(true);
-        $this->visit('/')
-         ->click('Register')
-         ->seePageIs('/get-started-1');
-        $this->visit('/')
-          ->click('login')
-          ->seePageIs('/login');
+         $this->visit('/')
+         	  ->see('the best way')
+         	  ->dontSee('the best wave');
     }
 }

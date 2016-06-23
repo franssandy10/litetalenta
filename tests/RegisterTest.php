@@ -11,8 +11,14 @@ class RegisterTest extends TestCase
      *
      * @return void
      */
-    public function testGetStartedOne()
-    {
+
+    public function testClickRegister(){
+      $this->visit('/')
+           ->click('Register')
+           ->seePageIs('/get-started-1');
+    }
+
+    public function testGetStartedOne(){
       // 1. if true
       $this->post('/get-started-1'
        , ['name' => 'Nadia Syarifa'
@@ -21,7 +27,7 @@ class RegisterTest extends TestCase
         ,'phone'=>'0821200776611'
         ,'password'=>'Nadiasayang10'
         ,'password_confirmation'=>'Nadiasayang10'])
-      ->seeJson(['status'=>'success','url'=>'http://locahost:8000/get-started-2']);
+      ->seeJson(['status'=>'success','url'=>route('getstarted.two')]);
       // 2. name kosong
       // if using app/http/requests/customrequest
       $this->post('/get-started-1'
@@ -69,14 +75,14 @@ class RegisterTest extends TestCase
         ,'password_confirmation'=>'Indovaping10'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
       ->seeJson(['email'=>['The email must be a valid email address.']])->assertResponseStatus(422);
       //7. Email sudah terdaftar.
-      // $this->post('/get-started-1'
-      //  , ['name' => 'frans testing'
-      //   ,'company_name'=>'Indovaping'
-      //   ,'email'=>'frans.purple@gmail.com'
-      //   ,'phone'=>'081200998811'
-      //   ,'password'=>'Indovaping10'
-      //   ,'password_confirmation'=>'Indovaping10'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
-      // ->seeJson(['email'=>['The email has already been taken.']])->assertResponseStatus(422);
+      $this->post('/get-started-1'
+       , ['name' => 'frans testing'
+        ,'company_name'=>'Indovaping'
+        ,'email'=>'frans.purple@gmail.com'
+        ,'phone'=>'081200998811'
+        ,'password'=>'Indovaping10'
+        ,'password_confirmation'=>'Indovaping10'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+      ->seeJson(['email'=>['The email has already been taken.']])->assertResponseStatus(422);
       //8. No tlp harus antara 6 dan 20 digit. 
       $this->post('/get-started-1'
        , ['name' => 'frans testing'
@@ -103,5 +109,10 @@ class RegisterTest extends TestCase
       //   ,'password'=>'testing'
       //   ,'password_confirmation'=>''],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
       // ->seeJson(['phone'=>['The phone must be between 6 and 20 digits']])->assertResponseStatus(422);
-    }
+}
+
+      public function testGetStartedTwo(){
+
+      }
+    
 }

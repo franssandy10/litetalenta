@@ -18,6 +18,20 @@ class RegisterTest extends TestCase
            ->seePageIs('/get-started-1');
     }
 
+    public function testFormGetStartedOne(){
+      $this->visit('/get-started-1')
+           ->see('Basic Profile')
+           ->dontSee('Register')
+           ->type('Honey Sugar','name')
+           ->type('Sejahtera', 'company_name')
+           ->type('honey.sugar@gmail.com','email')
+           ->type('02199008811','phone')
+           ->type('honeysugar123','password')
+           ->type('honeysugar123','password_confirmation');
+           // ->press('true')
+           // ->seeJson(['url'=>route('get-started-2')]);
+    }
+
     public function testGetStartedOne(){
       // 1. if true
       $this->post('/get-started-1'
@@ -92,27 +106,45 @@ class RegisterTest extends TestCase
         ,'password'=>'Indovaping10'
         ,'password_confirmation'=>'Indovaping10'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
       ->seeJson(['phone'=>['The phone must be between 6 and 20 digits.']])->assertResponseStatus(422);
-      //9. 
-      // $this->post('/get-started-1'     
-      //  , ['name' => 'frans testing'
-      //   ,'company_name'=>'Indovaping'
-      //   ,'email'=>'frans.purple@gmail.com'
-      //   ,'phone'=>'6591224'
-      //   ,'password'=>'testing123'
-      //   ,'password_confirmation'=>'Testing123'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
-      // ->seeJson([''=>['The phone must be between 6 and 20 digits.']])->assertResponseStatus(422);
+      //9. password kosong 
+      $this->post('/get-started-1'     
+        ,['name' => 'frans testing'
+        ,'company_name'=>'Indovaping'
+        ,'email'=>'testing@testing.com'
+        ,'phone'=>'081299880011'
+        ,'password'=>''
+        ,'password_confirmation'=>'Testin123'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+      ->seeJson(['password'=>['The password field is required.']])->assertResponseStatus(422);
+      //10. Password kurang dari 6 character
       // $this->post('/get-started-1'
       //  , ['name' => 'Testing Testing'
       //   ,'company_name'=>'Testing'
       //   ,'email'=>'testing@testing.com'
-      //   ,'phone'=>'6519'
-      //   ,'password'=>'testing'
-      //   ,'password_confirmation'=>''],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
-      // ->seeJson(['phone'=>['The phone must be between 6 and 20 digits']])->assertResponseStatus(422);
+      //   ,'phone'=>'02199001122'
+      //   ,'password'=>'Test2'
+      //   ,'password_confirmation'=>'Testing123'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+      // ->seeJson(['password'=>['The password must be at Least 6 characters.','The password confirmation does not match.']])->assertResponseStatus(422);
+
+      //11. Password tidak mengandung angka
+      // $this->post('/get-started-1'
+      //  , ['name' => 'Testing Testing'
+      //   ,'company_name'=>'Testing'
+      //   ,'email'=>'testing@testing.com'
+      //   ,'phone'=>'02199001122'
+      //   ,'password'=>'testingaja'
+      //   ,'password_confirmation'=>'Testing123'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+      // ->seeJson(['phone'=>['The password must be at least 6 characters.']])->assertResponseStatus(422);
+
+
 }
 
-      public function testGetStartedTwo(){
-
+      public function testFormGetStartedTwo(){
+       $this->visit('/get-started-2')
+           ->see('Time Off Setting')
+           ->dontSee('Register')
+           ->type('10','holiday')
+           ->type('5', 'sick');
+           
       }
     
 }

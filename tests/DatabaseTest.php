@@ -14,7 +14,5 @@ class DatabaseTest extends TestCase
     public function testDatabase()
     {
         $this->seeInDatabase('user_access', ['email' => 'rendyjames01@gmail.com']);
-    sdfd
     }
-
 }

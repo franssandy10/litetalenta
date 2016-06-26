@@ -6,7 +6,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://litetalenta.dev';
+    protected $baseUrl = 'http://localhost:8000';
 
     /**
      * Creates the application.

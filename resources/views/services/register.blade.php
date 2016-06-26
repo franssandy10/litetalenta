@@ -31,7 +31,7 @@
     </div>
     <input type="submit" name="submitButton" id="triggerButton" value="true" class="hide">
     <div class="row">
-      <a class="btn waves-effect waves-light" id="submitButton">Submit
+      <a class="btn waves-effect waves-light" id="submitButton" name="submitButton">Submit
         <i class="material-icons right">send</i>
       </a>
     </div>
@@ -40,6 +40,21 @@
 </div>
 @endsection
 @section('customjs')
+  
   <!-- This is the position navbar. -->
   {!! Html::script('assets/js/scriptRegister.js')!!}
+<script>
+
+$(document).ready(function(){
+  $("#submitButton").click(function(){
+    $form=$(this).parents('.container').find('form');
+    validateForm($form);
+  });
+
+$('#login-form').on('submit', function(e){
+    e.preventDefault();
+  })
+});
+
+</script>
  @endsection

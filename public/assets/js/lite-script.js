@@ -235,6 +235,10 @@ $(document).ready(function(){
 		}
 	})
 
+	$('form').on('submit', function(e){
+		e.preventDefault();
+	})
+
 	if ($('#tabs3').length){$('#tabs3').tabs()};
   	// submit button when using ID or submit can refresh
   	console.info("%cWe're hiring !" + "%c \nYou know you're developer and what we're looking for if you can find this message. \nPlease go check http://career.talenta.co","color: #9A0101; font-size: 32px; line-height: 2; font-family:Arial, Helvetica, sans-serif","color: #333; font-size: 20px; line-height: 2; font-style: normal !important; font-family:Arial, Helvetica, sans-serif");

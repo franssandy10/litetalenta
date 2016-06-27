@@ -43,18 +43,4 @@
   
   <!-- This is the position navbar. -->
   {!! Html::script('assets/js/scriptRegister.js')!!}
-<script>
-
-$(document).ready(function(){
-  $("#submitButton").click(function(){
-    $form=$(this).parents('.container').find('form');
-    validateForm($form);
-  });
-
-$('#login-form').on('submit', function(e){
-    e.preventDefault();
-  })
-});
-
-</script>
  @endsection

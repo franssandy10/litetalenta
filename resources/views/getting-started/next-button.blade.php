@@ -4,9 +4,9 @@
 ?>
 <div class="col s12" id="getting-started-footer">
 	<?php if ($i != 1) { ?>
-    	<a href="{{route('index') . '/get-started-' . $prev}}" class="btn btnB01 clearfix mt40 mr5">prev</a>
+    	<a href="{{route('index') . '/get-started-' . $prev}}" class="btn btnB01 clearfix mt40 mr5" >prev</a>
     <?php } ?>
-    <a href="#!" id="submitButton" class="btn btnB01 clearfix mt40">
+    <button id="submitButton" class="btn btnB01 clearfix mt40" name="submitButton">
     	<?php if ($i == 7) {
     		echo 'Finish';
     	} else if ($i == 2) {
@@ -14,5 +14,5 @@
     	} else {
     		echo 'next';
     	} ?>
-    </a>
+    </button>
 </div>

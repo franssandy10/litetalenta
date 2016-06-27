@@ -11,13 +11,13 @@ class RegisterTest extends TestCase
      *
      * @return void
      */
-
+    //Definition Link Page
     public function testClickRegister(){
       $this->visit('/')
            ->click('Register')
            ->seePageIs('/get-started-1');
     }
-
+    //Definition form
     public function testFormGetStartedOne(){
       $this->visit('/get-started-1')
            ->see('Basic Profile')
@@ -27,11 +27,10 @@ class RegisterTest extends TestCase
            ->type('honey.sugar@gmail.com','email')
            ->type('02199008811','phone')
            ->type('honeysugar123','password')
-           ->type('honeysugar123','password_confirmation');
-           // ->press('true')
-           // ->seeJson(['url'=>route('get-started-2')]);
+           ->type('honeysugar123','password_confirmation')
+           ->press('submitButton');         
     }
-
+    //Fill the form
     public function testGetStartedOne(){
       // 1. if true
       $this->post('/get-started-1'
@@ -116,35 +115,103 @@ class RegisterTest extends TestCase
         ,'password_confirmation'=>'Testin123'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
       ->seeJson(['password'=>['The password field is required.']])->assertResponseStatus(422);
       //10. Password kurang dari 6 character
-      // $this->post('/get-started-1'
-      //  , ['name' => 'Testing Testing'
-      //   ,'company_name'=>'Testing'
-      //   ,'email'=>'testing@testing.com'
-      //   ,'phone'=>'02199001122'
-      //   ,'password'=>'Test2'
-      //   ,'password_confirmation'=>'Testing123'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
-      // ->seeJson(['password'=>['The password must be at Least 6 characters.','The password confirmation does not match.']])->assertResponseStatus(422);
-
-      //11. Password tidak mengandung angka
-      // $this->post('/get-started-1'
-      //  , ['name' => 'Testing Testing'
-      //   ,'company_name'=>'Testing'
-      //   ,'email'=>'testing@testing.com'
-      //   ,'phone'=>'02199001122'
-      //   ,'password'=>'testingaja'
-      //   ,'password_confirmation'=>'Testing123'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
-      // ->seeJson(['phone'=>['The password must be at least 6 characters.']])->assertResponseStatus(422);
-
-
+      $this->post('/get-started-1'
+       , ['name' => 'Testing Testing'
+        ,'company_name'=>'Testing'
+        ,'email'=>'testing@testing.com'
+        ,'phone'=>'02199001122'
+        ,'password'=>'Test2'
+        ,'password_confirmation'=>'Testing123'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+      ->seeJson(['password'=>['The password must be at least 6 characters.','The password confirmation does not match.']])
+      ->assertResponseStatus(422);
+      //11. Not Contain number
+      $this->post('/get-started-1'
+       , ['name' => 'Testing Testing'
+        ,'company_name'=>'Testing'
+        ,'email'=>'testing@testing.com'
+        ,'phone'=>'02199001122'
+        ,'password'=>'Testing'
+        ,'password_confirmation'=>'Testing'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+      ->seeJson(['password'=>['The password must contain number,uppercase,lowercase']])
+      ->assertResponseStatus(422);
+      //12. Not Contain lowercase
+      $this->post('/get-started-1'
+       , ['name' => 'Testing Testing'
+        ,'company_name'=>'Testing'
+        ,'email'=>'testing@testing.com'
+        ,'phone'=>'02199001122'
+        ,'password'=>'TESTING1'
+        ,'password_confirmation'=>'TESTING1'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+      ->seeJson(['password'=>['The password must contain number,uppercase,lowercase']])
+      ->assertResponseStatus(422);
+       //13. Not Contain UPPERCASE
+      $this->post('/get-started-1'
+       , ['name' => 'Testing Testing'
+        ,'company_name'=>'Testing'
+        ,'email'=>'testing@testing.com'
+        ,'phone'=>'02199001122'
+        ,'password'=>'testing1'
+        ,'password_confirmation'=>'testing1'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+      ->seeJson(['password'=>['The password must contain number,uppercase,lowercase']])
+      ->assertResponseStatus(422);
 }
 
+      //Definition Form
       public function testFormGetStartedTwo(){
        $this->visit('/get-started-2')
            ->see('Time Off Setting')
            ->dontSee('Register')
            ->type('10','holiday')
-           ->type('5', 'sick');
-           
+           ->type('5', 'sick')
+           ->press('submitButton');           
       }
-    
+      //test button preview
+      public function testClickPrevForm2(){
+        $this->visit('/get-started-2')
+             ->click('prev')
+             ->seePageIs('/get-started-1');
+           }
+   
+      //Fill the form
+      public function testGetStartedTwo(){
+      $this->post('/get-started-2'
+      ,['holiday' => '12'
+      , 'sick'=>'6'])
+      ->seeJson(['status'=>'success','url'=>route('getstarted.three')]);
+      
+      //Holiday and sick kosong
+      $this->post('/get-started-2'
+      ,['holiday' => ''
+      , 'sick'=>''])
+      ->seeJson(['status'=>'success','url'=>route('getstarted.three')]);
+
+      //Holiday kosong
+      $this->post('/get-started-2'
+      ,['holiday' =>''
+      , 'sick' => '6'])
+      ->seeJson(['status'=>'success','url'=>route('getstarted.three')]);
+
+      //Sick kosong
+      $this->post('/get-started-2'
+      ,['holiday' =>'12'
+      , 'sick' => ''])
+      ->seeJson(['status'=>'success','url'=>route('getstarted.three')]);
+      }
+
+      //Definition Form
+      public function testFormGetStartedThree(){
+        $this->visit('/get-started-3')
+             ->see('Payroll Feature')
+             ->dontSee('Register')
+             ->select('yes','payroll_flag')
+             ->select('no','payroll_flag')
+             ->press('submitButton');
+      }
+
+      //test button preview
+      public function testClickPrevFrom3(){
+        $this->visit('/get-started-3')
+             ->click('prev')
+             ->seePageIs('/get-started-2');
+           }
 }

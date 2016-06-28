@@ -156,6 +156,8 @@ class RegisterTest extends TestCase
       ->assertResponseStatus(422);
 }
 
+/*----------------------------------------------------------------------------------------------------------------------*/
+
       //Definition Form
       public function testFormGetStartedTwo(){
        $this->visit('/get-started-2')
@@ -198,6 +200,7 @@ class RegisterTest extends TestCase
       ->seeJson(['status'=>'success','url'=>route('getstarted.three')]);
       }
 
+/*----------------------------------------------------------------------------------------------------------------------*/        
       //Definition Form
       public function testFormGetStartedThree(){
         $this->visit('/get-started-3')
@@ -209,9 +212,129 @@ class RegisterTest extends TestCase
       }
 
       //test button preview
-      public function testClickPrevFrom3(){
+      public function testClickPrevForm3(){
         $this->visit('/get-started-3')
              ->click('prev')
              ->seePageIs('/get-started-2');
-           }
+      }
+
+      //Pilih Payroll Flag Yes
+      public function testPayrollFlagYes(){
+        $this->post('/get-started-3'
+        , ['payroll_flag' => 'yes'])
+        ->seeJson(['url' => route('getstarted.four')]);
+      }
+
+      //Pilih Payroll Flag No
+      public function testPayrollFlagNo(){
+        $this->post('/get-started-3'
+        , ['payroll_flag' => 'No'])
+        ->seeJson(['url' => route('getstarted.four')]);
+      }
+
+/*---------------------------------------------------------------------------------------------------------------------*/
+
+      //Definition Form
+      public function testFormGetStartedFour(){
+      $this->visit('/get-started-4')
+           ->see('Configure Payroll')
+           ->dontSee('Attendance')
+           ->type('Merry Jane', 'tax_person_name')
+           ->type('984923743242398', 'tax_person_npwp')
+           ->type('2394327492394','company_npwp')
+           ->type('28 June, 2016','npwp_date')
+           ->type('4687236473264732782','company_bpjstk')
+           ->select('1','company_jkk')
+           ->select('2','company_jkk')
+           ->select('3','company_jkk')
+           ->select('4','company_jkk')
+           ->select('5','company_jkk')
+           ->press('submitButton');   
+            }
+
+      //test button preview
+      public function testClickPrevForm4(){
+        $this->visit('/get-started-4')
+             ->click('prev')
+             ->seePageIs('/get-started-3');
+      }
+
+      // Configure Payroll True
+      public function testConfigurePayrollTrue(){
+        $this->post('/get-started-4'
+        ,['tax_person_name' => 'Franko'
+        , 'tax_person_npwp' => '87.646.237.6-327.462'
+        , 'company_npwp' => '38.242.363.7-246.232'
+        , 'npwp_date' => '2016-06-30'
+        , 'company_bpjstk' => '293843282289387'
+        , 'company_jkk' => '1'])
+        ->seeJson(['status'=>'success','url'=>route('register')]);
+
+      // Tax person name kosong
+      $this->post('/get-started-4'
+        ,['tax_person_name' => ''
+        , 'tax_person_npwp' => '87.646.237.6-327.462'
+        , 'company_npwp' => '38.242.363.7-246.232'
+        , 'npwp_date' => '2016-06-30'
+        , 'company_bpjstk' => '293843282289387'
+        , 'company_jkk' => '1'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+        ->seeJson(['tax_person_name'=>['The Tax Person Name field is required.']])
+        ->assertResponseStatus(422);
+
+      // Tax Person NPWP kosong
+      $this->post('/get-started-4'
+        ,['tax_person_name' => 'Monalisa'
+        , 'tax_person_npwp' => ''
+        , 'company_npwp' => '38.242.363.7-246.232'
+        , 'npwp_date' => '2016-06-30'
+        , 'company_bpjstk' => '293843282289387'
+        , 'company_jkk' => '1'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+        ->seeJson(['tax_person_npwp'=>['The Tax Person NPWP Number field is required.']])  
+        ->assertResponseStatus(422);
+
+      // Tax Company NPWP kosong
+      $this->post('/get-started-4'
+        ,['tax_person_name' => 'Janeco'
+        , 'tax_person_npwp' => '23.908.786.4-234.678'
+        , 'company_npwp' => ''
+        , 'npwp_date' => '2016-06-30'
+        , 'company_bpjstk' => '293843282289387'
+        , 'company_jkk' => '1'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+        ->seeJson(['company_npwp'=>['The Company NPWP Number field is required.']])  
+        ->assertResponseStatus(422);
+
+        // NPWP Date kosong
+        $this->post('/get-started-4'
+        ,['tax_person_name' => 'Janeco'
+        , 'tax_person_npwp' => '23.908.786.4-234.678'
+        , 'company_npwp' => '22.345.234.5-435.543'
+        , 'npwp_date' => ''
+        , 'company_bpjstk' => '293843282289387'
+        , 'company_jkk' => '1'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+        ->seeJson(['npwp_date'=>['The NPWP Date field is required.']])  
+        ->assertResponseStatus(422);
+
+        // BPJSTK kosong
+        $this->post('/get-started-4'
+        ,['tax_person_name' => 'Janeco'
+        , 'tax_person_npwp' => '23.908.786.4-234.678'
+        , 'company_npwp' => '22.345.234.5-435.543'
+        , 'npwp_date' => '2016-05-10'
+        , 'company_bpjstk' => ''
+        , 'company_jkk' => '1'],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+        ->seeJson(['company_bpjstk'=>['The BPJSTK Number field is required.']])  
+        ->assertResponseStatus(422);
+
+        //Company JKK Kosong
+        $this->post('/get-started-4'
+        ,['tax_person_name' => 'Janeco'
+        , 'tax_person_npwp' => '23.908.786.4-234.678'
+        , 'company_npwp' => '22.345.234.5-435.543'
+        , 'npwp_date' => '2016-05-10'
+        , 'company_bpjstk' => '234867237642783827'
+        , 'company_jkk' => ''],['HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'])
+        ->seeJson(['company_jkk'=>['The JKK Type field is required.']])  
+        ->assertResponseStatus(422);
+      }
+
 }
